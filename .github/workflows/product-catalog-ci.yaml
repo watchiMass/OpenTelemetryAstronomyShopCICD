@@ -108,7 +108,7 @@ jobs:
         run: |
           git config --global user.email "massimatheodorejeriel@gmail.com"
           git config --global user.name "watchiMass"
-          git pull origin main --rebase
           git add kubernetes/productcatalog/deploy.yaml
-          git commit -m "[CI] Update product catalog image tag to ${{ github.run_id }}" || echo "No changes to commit"
+          git diff-index --quiet HEAD || git commit -m "[CI] Update product catalog image tag to ${{ github.run_id }}"
+          git pull origin main --rebase
           git push origin HEAD:main
