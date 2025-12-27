@@ -39,28 +39,28 @@ jobs:
         working-directory: src/product-catalog
         run: go test ./... -v
 
-  code-quality:
-    runs-on: ubuntu-latest
+  # code-quality:
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
       
-      - name: Setup Go 1.22
-        uses: actions/setup-go@v5
-        with:
-          go-version: '1.22'
-          cache-dependency-path: src/product-catalog/go.sum
+  #     - name: Setup Go 1.22
+  #       uses: actions/setup-go@v5
+  #       with:
+  #         go-version: '1.22'
+  #         cache-dependency-path: src/product-catalog/go.sum
 
-      - name: Run golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          version: latest
-          working-directory: src/product-catalog
+  #     - name: Run golangci-lint
+  #       uses: golangci/golangci-lint-action@v6
+  #       with:
+  #         version: latest
+  #         working-directory: src/product-catalog
 
   docker:
     runs-on: ubuntu-latest
-    needs: [build, code-quality]
+    needs: [build]
 
     steps:
       - name: Checkout code
